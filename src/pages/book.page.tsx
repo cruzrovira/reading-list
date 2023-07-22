@@ -14,11 +14,12 @@ import { useParams } from "react-router-dom"
 import { useLibraryContext } from "../hooks/useLibraryContext"
 import Layout from "../layout/layout"
 import { Book } from "../types/data"
-type props = {}
-const BookPage: React.FC<props> = ({}) => {
+
+const BookPage: React.FC = () => {
   const { isbn } = useParams()
-  const { getBookByIsbn, changeReadingStatus } = useLibraryContext()
   const toast = useToast()
+  const { getBookByIsbn, changeReadingStatus } = useLibraryContext()
+
   let book: Book | undefined
 
   if (isbn) {

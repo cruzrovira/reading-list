@@ -6,31 +6,14 @@ export const LibraryContext = createContext<{
   library: Library[] | undefined
   genres: string[]
   maxPages: number
-  filter: {
-    pages: number
-    genres: string
-    title: string
-  }
   getLibraryReading: () => Library[] | undefined
-  getLibraryFilter: () => Library[] | undefined
-
   changeReadingStatus: (isbn: string, reading: boolean) => void
-  setFilter: React.Dispatch<
-    React.SetStateAction<{
-      pages: number
-      genres: string
-      title: string
-    }>
-  >
   getBookByIsbn: (isbn: string) => Book | undefined
 }>({
   library: undefined,
   genres: [],
   maxPages: 0,
-  filter: { pages: 0, genres: "all", title: "" },
-  setFilter: () => {},
   getBookByIsbn: () => undefined,
-  getLibraryFilter: () => [],
   getLibraryReading: () => [],
   changeReadingStatus: () => {},
 })
@@ -44,44 +27,38 @@ export const LibraryContextProvider = ({
   const [genres, setGenres] = useState<string[]>([])
   const [maxPages, setMaxPages] = useState<number>(0)
 
-  const [filter, setFilter] = useState<{
-    pages: number
-    genres: string
-    title: string
-  }>({
-    pages: 0,
-    genres: "all",
-    title: "",
-  })
+  const initialSetting = () => {
+    let libraryTem: Library[] = []
+    if (localStorage.getItem("library") !== null) {
+      libraryTem = JSON.parse(localStorage.getItem("library")!)
+      setLibrary(() => libraryTem)
+    } else {
+      fetchLibrary().then(data => {
+        for (let i = 0; i < data.library.length; i++) {
+          data.library[i].book.reading = false
+        }
+        libraryTem = data.library
+        setLibrary(() => libraryTem)
+        localStorage.setItem("library", JSON.stringify(libraryTem))
+      })
+    }
 
-  useEffect(() => {
-    fetchLibrary().then(data => {
-      for (let i = 0; i < data.library.length; i++) {
-        data.library[i].book.reading = false
-      }
+    let tempGenres = libraryTem.map(({ book }) => book.genre)
+    let pages = libraryTem.map(({ book }) => book.pages)
 
-      setLibrary(() => data.library)
-      let tempGenres = data.library.map(({ book }) => book.genre)
-      let pages = data.library.map(({ book }) => book.pages)
+    setMaxPages(() => Math.max(...pages))
 
-      setMaxPages(() => Math.max(...pages))
-      setGenres(() =>
-        tempGenres.filter((genre, index) => {
-          return tempGenres.indexOf(genre) === index
+    setGenres(
+      () =>
+        tempGenres?.filter((genre, index) => {
+          return tempGenres?.indexOf(genre) === index
         }),
-      )
-    })
-  }, [])
-
-  const getLibraryFilter = () => {
-    return library?.filter(
-      ({ book }) =>
-        book.reading === false &&
-        book.pages >= filter.pages &&
-        book.title.toLowerCase().includes(filter.title.toLowerCase()) &&
-        (book.genre === filter.genres || filter.genres === "all"),
     )
   }
+  useEffect(() => {
+    initialSetting()
+  }, [])
+
   const getLibraryReading = () => {
     return library?.filter(({ book }) => book.reading === true)
   }
@@ -99,6 +76,7 @@ export const LibraryContextProvider = ({
       return { book }
     })
     setLibrary(result)
+    localStorage.setItem("library", JSON.stringify(result))
   }
 
   return (
@@ -107,10 +85,7 @@ export const LibraryContextProvider = ({
         library: library,
         genres: genres,
         maxPages: maxPages,
-        filter: filter,
         getBookByIsbn: getBookByIsbn,
-        getLibraryFilter: getLibraryFilter,
-        setFilter: setFilter,
         changeReadingStatus: changeReadingStatus,
         getLibraryReading: getLibraryReading,
       }}

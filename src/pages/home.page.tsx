@@ -2,12 +2,12 @@ import { Center, Spinner, Stack } from "@chakra-ui/react"
 import React from "react"
 import Filter from "../components/filter"
 import LibraryList from "../components/libraryList"
-import { useLibraryContext } from "../hooks/useLibraryContext"
-import Layout from "../layout/layout"
-type props = {}
 
-const HomePage: React.FC<props> = ({}) => {
-  const { getLibraryFilter } = useLibraryContext()
+import { useLibraryContextFilter } from "../hooks/useLibraryContextFilter"
+import Layout from "../layout/layout"
+
+const HomePage: React.FC = () => {
+  const { getLibraryFilter } = useLibraryContextFilter()
   const library = getLibraryFilter()
 
   return (

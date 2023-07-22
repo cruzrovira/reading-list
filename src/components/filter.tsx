@@ -15,13 +15,15 @@ import {
 } from "@chakra-ui/react"
 import React, { useState } from "react"
 import { useLibraryContext } from "../hooks/useLibraryContext"
+import { useLibraryContextFilter } from "../hooks/useLibraryContextFilter"
+
 type props = {}
 const Filter: React.FC<props> = ({}) => {
   const [title, setTitle] = useState("")
   const [sliderValue, setSliderValue] = useState(0)
-  const [showTooltip, setShowTooltip] = React.useState(false)
+  const [showTooltip, setShowTooltip] = useState(false)
   const { genres, maxPages } = useLibraryContext()
-  const { filter, setFilter } = useLibraryContext()
+  const { filter, setFilter } = useLibraryContextFilter()
 
   const handlerGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(prev => ({ ...prev, genres: e.target.value }))
@@ -31,7 +33,7 @@ const Filter: React.FC<props> = ({}) => {
     setSliderValue(page)
   }
 
-  const handlerButtonClick = () => {
+  const handlerSearchTitle = () => {
     setFilter(prev => ({ ...prev, title: title }))
   }
 
@@ -47,7 +49,7 @@ const Filter: React.FC<props> = ({}) => {
           />
         </InputGroup>
       </FormControl>
-      <Button colorScheme="teal" size={"sm"} onClick={handlerButtonClick}>
+      <Button colorScheme="teal" size={"sm"} onClick={handlerSearchTitle}>
         Search
       </Button>
       <Divider />
