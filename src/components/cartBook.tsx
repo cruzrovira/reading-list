@@ -1,4 +1,4 @@
-import { GridItem, Image, Text } from "@chakra-ui/react"
+import { GridItem, Image, Text, useColorModeValue } from "@chakra-ui/react"
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import { Book } from "../types/data"
@@ -8,10 +8,12 @@ type props = {
 const CartBook: React.FC<props> = ({ book }) => {
   const { title, cover, author, ISBN } = book
   const navigate = useNavigate()
+  const bg = useColorModeValue("white", "gray.800")
   return (
     <GridItem
-      bg={"white"}
+      bg={bg}
       p={4}
+      as="article"
       cursor={"pointer"}
       boxShadow={"sm"}
       _hover={{
@@ -29,7 +31,7 @@ const CartBook: React.FC<props> = ({ book }) => {
         w={"100%"}
         mb={1}
       />
-      <Text>
+      <Text isTruncated>
         <Text fontWeight={"bold"} as={"strong"} mr={1}>
           Autor:
         </Text>

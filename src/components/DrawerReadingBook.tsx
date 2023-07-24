@@ -8,6 +8,7 @@ import {
   DrawerOverlay,
   Image,
   Stack,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react"
 import React from "react"
@@ -20,11 +21,11 @@ const DrawerReadingBook: React.FC<props> = ({ isOpen, onClose }) => {
   const { getLibraryReading, changeReadingStatus } = useLibraryContext()
   const library = getLibraryReading()
   const toast = useToast()
-
+  const bg = useColorModeValue("white", "gray.900")
   return (
-    <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+    <Drawer isOpen={isOpen} onClose={onClose}>
       <DrawerOverlay />
-      <DrawerContent>
+      <DrawerContent bg={bg}>
         <DrawerCloseButton />
         <DrawerHeader>Reading List </DrawerHeader>
 

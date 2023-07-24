@@ -12,6 +12,7 @@ import {
   SliderTrack,
   Stack,
   Tooltip,
+  useColorModeValue,
 } from "@chakra-ui/react"
 import React, { useState } from "react"
 import { useLibraryContext } from "../hooks/useLibraryContext"
@@ -36,9 +37,9 @@ const Filter: React.FC<props> = ({}) => {
   const handlerSearchTitle = () => {
     setFilter(prev => ({ ...prev, title: title }))
   }
-
+  const bg = useColorModeValue("white", "gray.800")
   return (
-    <Stack bg={"white"} p={4}>
+    <Stack bg={bg} p={4}>
       <FormControl>
         <FormLabel>Search</FormLabel>
         <InputGroup>

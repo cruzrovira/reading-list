@@ -13,10 +13,10 @@ const HomePage: React.FC = () => {
   return (
     <Layout>
       <Stack direction={{ base: "column", md: "row" }} w="100%" gap={4}>
-        <Stack w={{ base: "100%", md: "300px" }}>
+        <Stack w={{ base: "100%", md: "300px" }} as="aside">
           <Filter />
         </Stack>
-        <Stack w={{ base: "100%", md: "calc( 100% - 300px)" }}>
+        <Stack w={{ base: "100%", md: "calc( 100% - 300px)" }} as="section">
           {library && <LibraryList library={library} />}
 
           {!library && (

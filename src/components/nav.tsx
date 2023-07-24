@@ -1,18 +1,21 @@
 import {
   Container,
   Heading,
+  Icon,
   Link,
   Stack,
-  Text,
+  useColorMode,
   useDisclosure,
 } from "@chakra-ui/react"
-
 import React from "react"
+import { FaBook, FaRegMoon, FaSun } from "react-icons/fa6"
 import { Link as ReachLink } from "react-router-dom"
 import DrawerReadingBook from "./DrawerReadingBook"
+
 type props = {}
 const Nav: React.FC<props> = ({}) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { toggleColorMode, colorMode } = useColorMode()
   return (
     <>
       <Stack as={"nav"} p={2} bg={"teal"} w="100%">
@@ -31,16 +34,34 @@ const Nav: React.FC<props> = ({}) => {
               Reader Book
             </Heading>
           </Link>
-
-          <Text
-            color={"white"}
-            fontSize={20}
-            fontWeight={"bold"}
-            cursor={"pointer"}
-            onClick={onOpen}
+          <Stack
+            direction={"row"}
+            alignItems={"center"}
+            justifyContent={"center"}
           >
-            reading
-          </Text>
+            <Link
+              onClick={e => {
+                e.preventDefault()
+                toggleColorMode()
+              }}
+              _hover={{ textDecoration: "none" }}
+            >
+              {colorMode === "light" ? (
+                <Icon as={FaRegMoon} color={"white"} />
+              ) : (
+                <Icon as={FaSun} color={"white"} />
+              )}
+            </Link>
+            <Link
+              onClick={e => {
+                e.preventDefault()
+                onOpen()
+              }}
+              _hover={{ textDecoration: "none" }}
+            >
+              <Icon as={FaBook} color={"white"} />
+            </Link>
+          </Stack>
         </Container>
       </Stack>
       <DrawerReadingBook isOpen={isOpen} onClose={onClose} />

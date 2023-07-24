@@ -30,6 +30,7 @@ const BookPage: React.FC = () => {
     <Layout>
       <Grid
         gridTemplateColumns={{ base: "1fr ", md: "300px minmax( 600px,1fr)" }}
+        as="article"
       >
         <GridItem bg={"white"} p={4} boxShadow={"sm"}>
           <Image
