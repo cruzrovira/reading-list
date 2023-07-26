@@ -5,7 +5,7 @@ export const useBooksContext = () => {
   const context = useContext(booksContext)
   if (context === undefined) {
     throw new Error(
-      "useLibraryContext must be used within a LibraryContextProvider",
+      "useBooksContext must be used within a BooksContextProvider",
     )
   }
   return context

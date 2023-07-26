@@ -7,7 +7,11 @@ type props = { books: Book[] }
 
 const LibraryList: React.FC<props> = ({ books }) => {
   return (
-    <Grid gridTemplateColumns={"repeat(auto-fit, minmax(200px, 1fr))"} gap={4}>
+    <Grid
+      gridTemplateColumns={"repeat(auto-fit, 200px)"}
+      gap={4}
+      justifyContent={{ base: "center", md: "flex-start" }}
+    >
       {books.map(book => (
         <CartBook key={book.ISBN} book={book} />
       ))}

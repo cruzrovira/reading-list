@@ -37,6 +37,13 @@ const Filter: React.FC<props> = ({}) => {
   const handlerSearchTitle = () => {
     setFilter(prev => ({ ...prev, title: title }))
   }
+  const handlerSearchTitleEnter = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (e.key === "Enter") {
+      handlerSearchTitle()
+    }
+  }
   const bg = useColorModeValue("white", "gray.800")
   return (
     <Stack bg={bg} p={4}>
@@ -47,6 +54,7 @@ const Filter: React.FC<props> = ({}) => {
             placeholder="Drácula"
             value={title}
             onChange={e => setTitle(e.target.value)}
+            onKeyUpCapture={handlerSearchTitleEnter}
           />
         </InputGroup>
       </FormControl>
