@@ -1,8 +1,8 @@
 import { useContext } from "react"
-import { LibraryContext } from "../contexts/libraryContext"
+import { booksContext } from "../contexts/booksContext"
 
-export const useLibraryContext = () => {
-  const context = useContext(LibraryContext)
+export const useBooksContext = () => {
+  const context = useContext(booksContext)
   if (context === undefined) {
     throw new Error(
       "useLibraryContext must be used within a LibraryContextProvider",

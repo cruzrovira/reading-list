@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite ",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest -w",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@chakra-ui/icons": "2.1.0",
@@ -37,6 +39,7 @@
     "eslint-plugin-react-refresh": "0.4.1",
     "prettier": "3.0.0",
     "typescript": "5.1.6",
-    "vite": "4.4.0"
+    "vite": "4.4.0",
+    "vitest": "0.33.0"
   }
 }

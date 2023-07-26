@@ -10,20 +10,25 @@ import {
   useToast,
 } from "@chakra-ui/react"
 import React from "react"
-import { useParams } from "react-router-dom"
-import { useLibraryContext } from "../hooks/useLibraryContext"
+import { useNavigate, useParams } from "react-router-dom"
+import { useBooksContext } from "../hooks/useBooksContext"
 import Layout from "../layout/layout"
 import { Book } from "../types/data"
 
 const BookPage: React.FC = () => {
   const { isbn } = useParams()
   const toast = useToast()
-  const { getBookByIsbn, changeReadingStatus } = useLibraryContext()
-
+  const { getBookByIsbn, changeBookReadingStatus } = useBooksContext()
+  const navigate = useNavigate()
   let book: Book | undefined
 
   if (isbn) {
     book = getBookByIsbn(isbn)
+  }
+
+  if (typeof book === "undefined") {
+    navigate("/", { replace: true })
+    return
   }
 
   return (
@@ -76,7 +81,7 @@ const BookPage: React.FC = () => {
                   duration: 1000,
                   isClosable: true,
                 })
-                book?.ISBN && changeReadingStatus(book?.ISBN, true)
+                book?.ISBN && changeBookReadingStatus(book?.ISBN, true)
               }}
             >
               read
@@ -94,7 +99,7 @@ const BookPage: React.FC = () => {
                   duration: 1000,
                   isClosable: true,
                 })
-                book?.ISBN && changeReadingStatus(book?.ISBN, false)
+                book?.ISBN && changeBookReadingStatus(book?.ISBN, false)
               }}
             >
               cancel read

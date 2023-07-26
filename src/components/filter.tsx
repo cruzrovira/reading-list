@@ -15,16 +15,16 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react"
 import React, { useState } from "react"
-import { useLibraryContext } from "../hooks/useLibraryContext"
-import { useLibraryContextFilter } from "../hooks/useLibraryContextFilter"
+import { useBooksContext } from "../hooks/useBooksContext"
+import { useBooksContextFilter } from "../hooks/useBooksContextFilter"
 
 type props = {}
 const Filter: React.FC<props> = ({}) => {
   const [title, setTitle] = useState("")
   const [sliderValue, setSliderValue] = useState(0)
   const [showTooltip, setShowTooltip] = useState(false)
-  const { genres, maxPages } = useLibraryContext()
-  const { filter, setFilter } = useLibraryContextFilter()
+  const { genres, maxPages } = useBooksContext()
+  const { filter, setFilter } = useBooksContextFilter()
 
   const handlerGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(prev => ({ ...prev, genres: e.target.value }))

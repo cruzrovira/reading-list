@@ -12,14 +12,14 @@ import {
   useToast,
 } from "@chakra-ui/react"
 import React from "react"
-import { useLibraryContext } from "../hooks/useLibraryContext"
+import { useBooksContext } from "../hooks/useBooksContext"
 type props = {
   isOpen: boolean
   onClose: () => void
 }
 const DrawerReadingBook: React.FC<props> = ({ isOpen, onClose }) => {
-  const { getLibraryReading, changeReadingStatus } = useLibraryContext()
-  const library = getLibraryReading()
+  const { getBooksReading, changeBookReadingStatus } = useBooksContext()
+  const books = getBooksReading()
   const toast = useToast()
   const bg = useColorModeValue("white", "gray.900")
   return (
@@ -31,7 +31,7 @@ const DrawerReadingBook: React.FC<props> = ({ isOpen, onClose }) => {
 
         <DrawerBody>
           <Stack gap={4}>
-            {library?.map(({ book }) => (
+            {books.map(book => (
               <Stack key={book.ISBN} alignItems={"center"} display={"flex"}>
                 <Image
                   src={book.cover}
@@ -42,7 +42,7 @@ const DrawerReadingBook: React.FC<props> = ({ isOpen, onClose }) => {
                 <Button
                   mt={4}
                   colorScheme="red"
-                  isDisabled={!book?.reading}
+                  isDisabled={!book.reading}
                   onClick={() => {
                     toast({
                       title: "Book remove",
@@ -52,7 +52,7 @@ const DrawerReadingBook: React.FC<props> = ({ isOpen, onClose }) => {
                       duration: 1000,
                       isClosable: true,
                     })
-                    book?.ISBN && changeReadingStatus(book?.ISBN, false)
+                    book.ISBN && changeBookReadingStatus(book.ISBN, false)
                   }}
                 >
                   cancel read

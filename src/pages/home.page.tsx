@@ -3,12 +3,14 @@ import React from "react"
 import Filter from "../components/filter"
 import LibraryList from "../components/libraryList"
 
-import { useLibraryContextFilter } from "../hooks/useLibraryContextFilter"
+import { useBooksContext } from "../hooks/useBooksContext"
+import { useBooksContextFilter } from "../hooks/useBooksContextFilter"
 import Layout from "../layout/layout"
 
 const HomePage: React.FC = () => {
-  const { getLibraryFilter } = useLibraryContextFilter()
-  const library = getLibraryFilter()
+  const { loading } = useBooksContext()
+  const { getBooksFilter } = useBooksContextFilter()
+  const books = getBooksFilter()
 
   return (
     <Layout>
@@ -17,9 +19,9 @@ const HomePage: React.FC = () => {
           <Filter />
         </Stack>
         <Stack w={{ base: "100%", md: "calc( 100% - 300px)" }} as="section">
-          {library && <LibraryList library={library} />}
-
-          {!library && (
+          {!loading ? (
+            <LibraryList books={books} />
+          ) : (
             <Center>
               <Spinner size={"xl"} />
             </Center>
