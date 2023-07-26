@@ -4,6 +4,7 @@ import {
   Icon,
   Link,
   Stack,
+  Tooltip,
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/react"
@@ -39,28 +40,32 @@ const Nav: React.FC<props> = ({}) => {
             alignItems={"center"}
             justifyContent={"center"}
           >
-            <Link
-              onClick={e => {
-                e.preventDefault()
-                toggleColorMode()
-              }}
-              _hover={{ textDecoration: "none" }}
-            >
-              {colorMode === "light" ? (
-                <Icon as={FaRegMoon} color={"white"} />
-              ) : (
-                <Icon as={FaSun} color={"white"} />
-              )}
-            </Link>
-            <Link
-              onClick={e => {
-                e.preventDefault()
-                onOpen()
-              }}
-              _hover={{ textDecoration: "none" }}
-            >
-              <Icon as={FaBook} color={"white"} />
-            </Link>
+            <Tooltip label="Theme Color" aria-label="Theme Color">
+              <Link
+                onClick={e => {
+                  e.preventDefault()
+                  toggleColorMode()
+                }}
+                _hover={{ textDecoration: "none" }}
+              >
+                {colorMode === "light" ? (
+                  <Icon as={FaRegMoon} color={"white"} />
+                ) : (
+                  <Icon as={FaSun} color={"white"} />
+                )}
+              </Link>
+            </Tooltip>
+            <Tooltip label="Reading Book" aria-label="Reading Book">
+              <Link
+                onClick={e => {
+                  e.preventDefault()
+                  onOpen()
+                }}
+                _hover={{ textDecoration: "none" }}
+              >
+                <Icon as={FaBook} color={"white"} />
+              </Link>
+            </Tooltip>
           </Stack>
         </Container>
       </Stack>
