@@ -1,83 +1,43 @@
-# 01 - Desarrollo de una Aplicación de Lista de Libros
+# Reading List
 
-El objetivo de esta prueba es diseñar e implementar una pequeña aplicación web de lista de libros utilizando las herramientas de tu elección.
+¡Bienvenido al proyecto Reading List desarrollado con React y Chakra-UI! Este proyecto es parte del reto de [pruebas técnicas](https://github.com/midudev/pruebas-tecnicas/tree/main/pruebas/01-reading-list) propuesto por [@midudev](https://github.com/midudev/pruebas-tecnicas/tree/main/pruebas/01-reading-list). A continuación, encontrarás información sobre el proyecto, cómo configurarlo y dónde puedes ver el demo en línea.
 
-- [¿Cómo puedo participar?](https://github.com/midudev/pruebas-tecnicas#c%C3%B3mo-participar)
-- **La prueba está abierta a revisión hasta el 27 de julio de 2023**
-- Prueba basada en [esta prueba real para Juniors](https://discord.com/channels/741237973663612969/848944161448132628/1127729621744500806).
+## Descripción del Proyecto
 
-Este proyecto busca probar tus habilidades en el manejo de interacciones con el usuario, gestión del estado, filtrado de datos y la estructuración del código.
-![Sin título-2023-03-24-0943 (1)](https://github.com/midudev/pruebas-tecnicas/assets/1561955/a829323d-07e6-4937-91c6-5498481148c5)
+El objetivo de este proyecto es crear una aplicación web llamada Reading List utilizando React . La aplicación tiene como finalidad ofrecer a nuestro público una forma de ver nuestro catálogo y poder guardar los libros que les interesan en una lista de lectura. La interfaz de usuario será moderna, intuitiva y receptiva, y se enfocará en la reutilización de componentes.
 
-## Contexto
+## Características del Proyecto
 
-Somos un sello editorial de libros multinacional. Queremos ofrecer a nuestro público una forma de ver nuestro catálogo y poder guardar los libros que les interesan en una lista de lectura.
+- Interfaz de usuario amigable y atractiva para gestionar una lista de libros.
+- Uso de componentes funcionales de React para una arquitectura limpia y mantenible.
+- Aplicación responsive que se adapta a diferentes tamaños de pantalla, facilitando su uso en dispositivos móviles.
 
-Para ello, queremos desarrollar una aplicación web que permita a los usuarios ver los libros disponibles y crear una lista de lectura. Ten en cuenta que:
+## Cómo Configurar el Proyecto
 
-- No sabemos si el framework que utilicemos ahora será el definitivo, pero querremos reutilizar el máximo de código posible.
-- La aplicación debe ser fácil de usar y agradable a la vista.
-- Tenemos un 80% de usuarios que vienen de navegadores de escritorio.
+Si deseas probar el proyecto de forma local en tu máquina, sigue estos pasos:
 
-Usa el archivo `books.json` para obtener los datos de los libros. Puedes añadir más libros si lo deseas, siempre y cuando siga la misma estructura.
+1. Clona el repositorio desde GitHub:
 
-## Requisitos
+```
+git clone <URL_DEL_REPOSITORIO>
+```
 
-### Funcionalidad
+2. Instala las dependencias necesarias utilizando npm o yarn:
 
-1. **Visualización de Libros Disponibles**: La aplicación debe mostrar una lista de libros disponibles que el usuario pueda revisar.
+```
+cd reading-list
+npm install
+```
 
-2. **Creación de Lista de Lectura**: El usuario debe ser capaz de crear una lista de lectura a partir de los libros disponibles. En la UI debe quedar claro qué libros están en la lista de lectura y cuáles no. También debe ser posible mover un libro de la lista de lectura a la lista de disponibles.
+3. Inicia el servidor de desarrollo:
 
-3. **Filtrado de Libros por Género**: Los usuarios deben poder filtrar la lista de libros disponibles por género, y se mostrará un contador con el número de libros disponibles, el número de libros en la lista de lectura y el número de libros disponibles en el género seleccionado.
+```
+cd reading-list
+npm run dev
+```
 
-4. **Sincronización de Estado**: Debe haber una sincronización del estado global que refleje el número de libros en la lista de lectura y el número de libros todavía disponibles. Si un libro se mueve de la lista de disponibles a la lista de lectura, el recuento de ambos debe actualizarse en consecuencia.
+Esto abrirá la aplicación en tu navegador predeterminado. Ahora podrás ver y probar la aplicación en tu entorno local.
 
-5. **Persistencia de Datos**: La aplicación debe persistir los datos de la lista de lectura en el almacenamiento local del navegador. Al recargar la página, la lista de lectura debe mantenerse.
+## Demo en Línea
 
-6. **Sincronización entre pestañas**: Si el usuario abre la aplicación en dos pestañas diferentes, los cambios realizados en una pestaña deben reflejarse en la otra. Sin necesidad de usar Backend.
-
-7. **Despliegue**: La aplicación debe estar desplegada en algún servicio de hosting gratuito (Netlify, Vercel, Firebase, etc) y debe ser accesible a través de una URL pública. Indica la URL en el README.
-
-8. **Test**: La aplicación debe tener AL MENOS un test. Haz el test que consideres más importante para tu aplicación.
-
-## Consejos sobre el código
-
-1. **Estructura del código**: El código debe estar bien organizado y fácil de leer.
-
-2. **Semántica HTML**: El HTML debe ser semántico y accesible.
-
-3. **Pensando en equipo**: Prepara tu proyecto pensando que cualquier persona de tu equipo puede tener que trabajar en él en el futuro. (scripts en el package.json, mínima documentación en el README, comentarios en el código si es necesario, etc)
-
-4. **Formatea tu código**: Asegúrate de que tu código está formateado de forma consistente. Puedes usar Prettier o cualquier otra herramienta que te guste.
-
-5. **Preparado para producción**: Asegúrate de que tu aplicación está lista para producción. Minimiza el código, optimiza las imágenes, etc.
-
-## Desafíos adicionales
-
-**¿Quieres ir más allá?** Estos son algunos desafíos adicionales que puedes intentar:
-
-- Implementar una funcionalidad de búsqueda en la lista de libros disponibles.
-- Añade un nuevo filtro para filtrar los libros por número de páginas.
-- Permitir la reorganización de los libros en la lista de lectura por prioridad.
-- Haz que tu diseño sea responsive.
-
-## Entrevista
-
-Si pasas a la siguiente fase, te pediremos que hagas una entrevista con nosotros. Durante la entrevista, te pediremos que expliques tu código y que hagas algunos cambios en el mismo.
-
-- Nos tendrás que explicar el código que has escrito y las decisiones que has tomado.
-- Haremos cambios en el JSON y tendrás que adaptar el código en vivo.
-- Añadiremos un nuevo filtro a la aplicación y tendrás que implementarlo.
-
-Buena suerte y ¡diviértete programando!
-
-## Referencias
-
-- Diseño de Josh W. Comeau para una aplicación de libros pendientes de leer: https://twitter.com/JoshWComeau/status/1678893330480898049
-
-- Dribbble con rediseño de Goodreads: https://dribbble.com/shots/2523654-Books-listing-page-goodreads
-
-- Concepto de uso de arrastrar libros: https://dribbble.com/shots/19351938-Mybooks-Page-Board
-
-- Concepto de landing para una aplicación de libros: https://dribbble.com/shots/16279204-Book-Web-Store-Concept
+También puedes acceder al demo en línea del proyecto "Reading List" a través de la siguiente dirección web: [Demo del Proyecto](https://graceful-tartufo-59b68d.netlify.app/)
